@@ -1,0 +1,22 @@
+{
+  "name": "simplecart-bitpay-proxy",
+  "version": "0.0.1",
+  "description": "Simplecart-to-Bitpay proxy",
+  "author": {
+    "name": "Gergely Imreh",
+    "email": "gergely@imreh.net"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imrehg/simplecart-bitpay-proxy.git"
+  },
+  "dependencies": {
+    "nconf": "^0.6.9",
+    "restify": "^2.8.1"
+  },
+  "engines": {
+    "node": ">=0.10.15",
+    "npm": ">=1.2.0"
+  }
+}

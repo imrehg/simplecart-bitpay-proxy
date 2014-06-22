@@ -33,7 +33,7 @@ function sendToBitpay(req, res, next) {
 }
 
 var app = express();
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.route('/')
   .post(sendToBitpay);

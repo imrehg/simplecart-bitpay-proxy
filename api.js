@@ -1,5 +1,7 @@
-var restify = require('restify')
+var bodyParser = require("body-parser")
+  , express = require("express")
   , nconf = require('nconf')
+  , restler = require('restler')
 ;
 
 // Load configuration
@@ -8,18 +10,36 @@ nconf.argv()
     .file({ file: 'config.json' });
 
 nconf.defaults({
+    'BITPAY_API_KEY': '',
     'PORT': 3000
 });
 
-function respond(req, res, next) {
-  res.send('hello ' + req.params.name);
-  next();
+function sendToBitpay(req, res, next) {
+    var invoice = req.body;
+    console.log(invoice);
+
+    restler.postJson('https://bitpay.com/api/invoice',
+		     invoice,
+		     {
+			 username: nconf.get('BITPAY_API_KEY'),
+			 password: ''
+		     }
+		    ).on('complete', function(data, response) {
+			if (response.statusCode == 200) {
+			    console.log(data)
+			    res.header('Location', data.url );
+			    res.send(302);
+			}
+		    });
 }
 
-var server = restify.createServer();
-server.get('/hello/:name', respond);
-server.head('/hello/:name', respond);
+var app = express();
+app.use(bodyParser.urlencoded());
 
-server.listen(nconf.get('PORT'), function() {
-  console.log('%s listening at %s', server.name, server.url);
+app.route('/')
+  .post(sendToBitpay);
+
+// Launch server
+var server = app.listen(nconf.get('PORT'), function() {
+    console.log('Listening on port %d', server.address().port);
 });

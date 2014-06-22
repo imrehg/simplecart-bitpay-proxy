@@ -12,8 +12,10 @@
     "url": "https://github.com/imrehg/simplecart-bitpay-proxy.git"
   },
   "dependencies": {
+    "body-parser": "^1.4.3",
+    "express": "^4.4.4",
     "nconf": "^0.6.9",
-    "restify": "^2.8.1"
+    "restler": "^3.2.2"
   },
   "engines": {
     "node": "0.10.x"

@@ -26,7 +26,6 @@ function sendToBitpay(req, res, next) {
 		     }
 		    ).on('complete', function(data, response) {
 			if (response.statusCode == 200) {
-			    console.log(data)
 			    res.header('Location', data.url );
 			    res.send(302);
 			}

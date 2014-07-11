@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "body-parser": "^1.4.3",
-    "express": "^4.4.4",
+    "express": "^4.5.1",
     "nconf": "^0.6.9",
     "restler": "^3.2.2"
   },
